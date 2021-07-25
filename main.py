@@ -3,7 +3,7 @@ import discord
 import datetime
 import random
 from discord.ext import commands
-from config-2 import settings
+from config import settings
 import time
 import json
 import requests
