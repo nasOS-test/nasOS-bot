@@ -7,7 +7,10 @@ from config import settings
 import time
 import json
 import requests
+from pretty_help import DefaultMenu, PrettyHelp
 bot = commands.Bot(command_prefix = settings['prefix'])
+menu = DefaultMenu(page_left="⏮️", page_right="⏭️", remove="❌", active_time=60)
+bot.help_command = PrettyHelp(menu=menu)
 @bot.event
 async def on_ready():
     activity = discord.Activity(type=discord.ActivityType.listening, name="nasOS is the best")
