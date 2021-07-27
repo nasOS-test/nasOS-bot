@@ -16,19 +16,19 @@ async def on_ready():
     activity = discord.Activity(type=discord.ActivityType.listening, name="nasOS is the best")
     await bot.change_presence(status=discord.Status.idle, activity=activity)
     print("Bot is ready!")
-@bot.command()
+@bot.command(help="Say hello")
 async def hello(ctx): 
     author = ctx.message.author
-    print("Привет, %s" % author)
-    await ctx.send("Привет, %s" % author)
-@bot.command()
+    print("Hello, %s" % author)
+    await ctx.send("Hello, %s" % author)
+@bot.command(help="Send message 30 times")
 async def spam(ctx, st):
     author = ctx.message.author
     print(author)
     for x in range(0, 30):
         print("%s" % st)
         await ctx.send("%s" % st)
-@bot.command() 
+@bot.command(help="Write text") 
 async def write(ctx, arg): 
     t = str(arg)
     author = ctx.message.author
@@ -54,8 +54,8 @@ async def invite(ctx):
 async def nasOS(ctx):
     author = ctx.message.author
     print(author)
-    await ctx.send("Наш сайт: \n http://nas-os.ml/")
-@bot.command()
+    await ctx.send("Our site: \n http://nas-os.ml/")
+@bot.command(help="Send a meme")
 async def meme(ctx):
     response = requests.get('https://some-random-api.ml/meme') # Get-запрос
     json_data = json.loads(response.text) # Извлекаем JSON
