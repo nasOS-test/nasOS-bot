@@ -93,5 +93,5 @@ async def tts(ctx, text, lang):
  lang = str(lang)
  a = tts(text, lang=lang)
  a.save("aboba.mp3")
- await ctx.send(file=discord.File("aboba.mp3))
+ await ctx.send(file=discord.File("aboba.mp3"))
 bot.run(settings['token']) # Обращаемся к словарю settings с ключом token, для получения токена
