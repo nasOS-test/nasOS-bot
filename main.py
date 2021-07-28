@@ -6,6 +6,7 @@ from discord.ext import commands
 from config import settings
 import time
 import json
+from gtts import gTTS as tts
 import requests
 from pretty_help import DefaultMenu, PrettyHelp
 bot = commands.Bot(command_prefix = settings['prefix'])
@@ -86,4 +87,11 @@ async def unban(ctx, member: discord.Member):
 @bot.command()
 async def avatar(ctx, member: discord.Member):
     await ctx.send(member.avatar_url)
+@bot.command(help="Text to speech. \nUsage: n!tts text language")
+async def tts(ctx, text, lang):
+ text = str(text)
+ lang = str(lang)
+ a = tts(text, lang=lang)
+ a.save("aboba.mp3")
+ await ctx.send(file=discord.File("aboba.mp3))
 bot.run(settings['token']) # Обращаемся к словарю settings с ключом token, для получения токена
