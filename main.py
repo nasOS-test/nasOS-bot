@@ -92,7 +92,7 @@ async def avatar(ctx, member: discord.Member):
 async def tts(ctx, text, lang):
  text = str(text)
  lang = str(lang)
- a = gTTS.tts(text, lang=lang)
+ a = gTTS(text, lang=lang)
  print(a)
  a.save("aboba.mp3")
  await ctx.send(file=discord.File("aboba.mp3"))
