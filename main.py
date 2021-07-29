@@ -7,7 +7,7 @@ from config import settings
 import time
 import json
 from gtts import gTTS
-
+from simpledemotivators import Demotivator
 import requests
 from pretty_help import DefaultMenu, PrettyHelp
 bot = commands.Bot(command_prefix = settings['prefix'])
@@ -96,4 +96,12 @@ async def tts(ctx, text, lang):
  print(a)
  a.save("tts.mp3")
  await ctx.send(file=discord.File("tts.mp3"))
+@bot.command()
+async def demotivator(ctx, a, b):
+ a=str(a); b=str(b)
+ for attach in ctx.message.attachments:
+  await attach.save("pic.png")
+ d = Demotivator(a,b)
+ d.create("pic.png", line="NASBOBA", fonttext="Gidole-Regular.ttf")
+ await ctx.send(file=discord.File("demresult.jpg"))
 bot.run(settings['token']) # Обращаемся к словарю settings с ключом token, для получения токена
