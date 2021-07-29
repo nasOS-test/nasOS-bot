@@ -103,5 +103,5 @@ async def demotivator(ctx, a, b):
   await attach.save("pic.png")
  d = Demotivator(a,b)
  d.create("pic.png", line="nasOS funny", fonttext="CALIBRI.TTF")
- await ctx.send(file=discord.File("demresult.jpg"))
+ await ctx.send(file=discord.File("pic.png"))
 bot.run(settings['token']) # Обращаемся к словарю settings с ключом token, для получения токена
