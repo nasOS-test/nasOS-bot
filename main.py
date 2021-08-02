@@ -97,7 +97,7 @@ async def tts(ctx, text, lang):
  a.save("tts.mp3")
  await ctx.send(file=discord.File("tts.mp3"))
 @bot.command()
-async def demotivator(ctx, a, b):
+async def demotivator(ctx, a=" ", b=" "):
  a=str(a); b=str(b)
  for attach in ctx.message.attachments:
   await attach.save("pic.png")
