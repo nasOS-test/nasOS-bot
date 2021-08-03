@@ -40,8 +40,8 @@ async def write(ctx, arg):
 async def warn(ctx, arg):
     tt = str(arg)
     author = ctx.message.author
-    print(author, "Участнику %s вынеcно предупреждение!" % tt)
-    await ctx.send("Участнику %s вынеcно предупреждение!" % tt) #отправляем обратно аргумент
+    print(author, "User %s has been warned!" % tt)
+    await ctx.send("User %s has been warned!" % tt) #отправляем обратно аргумент
 @bot.command()
 async def date(ctx):
     author = ctx.message.author
