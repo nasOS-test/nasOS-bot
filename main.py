@@ -50,8 +50,8 @@ async def date(ctx):
 @bot.command()
 async def invite(ctx):
     author = ctx.message.author
-    print("Бота можно добавить по ссылке: \n" + "https://discord.com/api/oauth2/authorize?client_id=806926827552899094&permissions=8&scope=bot", author)
-    await ctx.send("Бота можно добавить по ссылке: \n" + "https://discord.com/api/oauth2/authorize?client_id=806926827552899094&permissions=8&scope=bot")
+    print("This bot can be invited through a link: \n" + "https://discord.com/api/oauth2/authorize?client_id=806926827552899094&permissions=8&scope=bot", author)
+    await ctx.send("This bot can be invited through a link: \n" + "https://discord.com/api/oauth2/authorize?client_id=806926827552899094&permissions=8&scope=bot")
 @bot.command()
 async def nasOS(ctx):
     author = ctx.message.author
