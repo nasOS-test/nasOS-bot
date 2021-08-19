@@ -104,4 +104,20 @@ async def demotivator(ctx, a=" ", b=" "):
  d = Demotivator(a,b)
  d.create("pic.png", line="nasOS funny", fonttext="CALIBRI.TTF")
  await ctx.send(file=discord.File("demresult.jpg"))
+@bot.command()
+async def aboba(ctx, b="Аргумент не указан"):
+   b=str
+   b = b.replace("a", "🅰️")
+   b = b.replace("A", "🅰️")
+   b = b.replace("а", "🅰️")
+   b = b.replace("А", "🅰️")
+   b = b.replace("b", "🅱️")
+   b = b.replace("B", "🅱️")
+   b = b.replace("б", "🅱️")
+   b = b.replace("Б", "🅱️")
+   b = b.replace("o", "🅾️")
+   b = b.replace("O", "🅾️")
+   b = b.replace("о", "🅾️")
+   b = b.replace("О", "🅾️")
+   await ctx.send(b)
 bot.run(settings['token']) # Обращаемся к словарю settings с ключом token, для получения токена
