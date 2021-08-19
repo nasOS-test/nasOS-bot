@@ -106,7 +106,7 @@ async def demotivator(ctx, a=" ", b=" "):
  await ctx.send(file=discord.File("demresult.jpg"))
 @bot.command()
 async def aboba(ctx, b="Аргумент не указан"):
-   b=str
+   b=str(b)
    b = b.replace("a", "🅰️")
    b = b.replace("A", "🅰️")
    b = b.replace("а", "🅰️")
