@@ -21,8 +21,8 @@ async def on_ready():
     print("Bot is ready!")
 @bot.event
 async def on_message(message):
-  rankup(message.author.id)
   await bot.process_commands(message)
+  rankup(message.author.id)
 @bot.command()
 async def rank(ctx):
   rank = str(getrank(ctx.message.author.id))
