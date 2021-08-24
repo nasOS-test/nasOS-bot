@@ -13,11 +13,20 @@ from pretty_help import DefaultMenu, PrettyHelp
 bot = commands.Bot(command_prefix = settings['prefix'])
 menu = DefaultMenu(page_left="⏮️", page_right="⏭️", remove="❌", active_time=60)
 bot.help_command = PrettyHelp(menu=menu)
+from dbconnect import rankup, getrank
 @bot.event
 async def on_ready():
     activity = discord.Activity(type=discord.ActivityType.listening, name="nasOS is the best")
     await bot.change_presence(status=discord.Status.idle, activity=activity)
     print("Bot is ready!")
+@bot.event
+async def on_message(message):
+  rankup(message.author.id)
+  await bot.process_commands(message)
+@bot.command()
+async def rank(ctx):
+  rank = str(getrank(ctx.message.author.id))
+  await ctx.send("Ранг: "+rank+"\nРанг общий для всех серверов")
 @bot.command(help="Say hello")
 async def hello(ctx): 
     author = ctx.message.author
