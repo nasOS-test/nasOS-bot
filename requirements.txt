@@ -3,3 +3,5 @@ requests
 discord-pretty-help
 gtts
 https://github.com/Infqq/simpledemotivators/archive/main.zip
+pymysql
+sqlalchemy
