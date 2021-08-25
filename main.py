@@ -22,11 +22,11 @@ async def on_ready():
 @bot.event
 async def on_message(message):
   await bot.process_commands(message)
-  rankup(message.author.id)
-@bot.command()
-async def rank(ctx):
-  rank = str(getrank(ctx.message.author.id))
-  await ctx.send("Ранг: "+rank+"\nРанг общий для всех серверов")
+#  rankup(message.author.id)
+#@bot.command()
+#async def rank(ctx):
+#  rank = str(getrank(ctx.message.author.id))
+#  await ctx.send("Ранг: "+rank+"\nРанг общий для всех серверов")
 @bot.command(help="Say hello")
 async def hello(ctx): 
     author = ctx.message.author
