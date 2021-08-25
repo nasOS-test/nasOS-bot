@@ -1,1 +1,1 @@
-main: python3 main.py
+default: python3 main.py
