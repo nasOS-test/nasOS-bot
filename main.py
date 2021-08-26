@@ -13,7 +13,7 @@ from pretty_help import DefaultMenu, PrettyHelp
 bot = commands.Bot(command_prefix = settings['prefix'])
 menu = DefaultMenu(page_left="⏮️", page_right="⏭️", remove="❌", active_time=60)
 bot.help_command = PrettyHelp(menu=menu)
-from dbconnect import rankup, getrank
+#from dbconnect import rankup, getrank
 @bot.event
 async def on_ready():
     activity = discord.Activity(type=discord.ActivityType.listening, name="nasOS is the best")
