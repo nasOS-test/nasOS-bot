@@ -9,11 +9,17 @@ import json
 from gtts import gTTS
 from simpledemotivators import Demotivator
 import requests
+from jinya2 import Template
 from pretty_help import DefaultMenu, PrettyHelp
 bot = commands.Bot(command_prefix = settings['prefix'])
 menu = DefaultMenu(page_left="⏮️", page_right="⏭️", remove="❌", active_time=60)
 bot.help_command = PrettyHelp(menu=menu)
 #from dbconnect import rankup, getrank
+class Class_a:
+ def e(self, id):
+  return "<:emoji:" + str(id) + ">"
+ def plaintxt(self, txt):
+  return txt
 @bot.event
 async def on_ready():
     activity = discord.Activity(type=discord.ActivityType.listening, name="nasOS is the best")
@@ -129,4 +135,7 @@ async def aboba(ctx, b="Аргумент не указан"):
    b = b.replace("о", "🅾️")
    b = b.replace("О", "🅾️")
    await ctx.send(b)
+@bot.command()
+async def j(ctx, t):
+  return Template(t).render(ctx=Class_a())
 bot.run(settings['token']) # Обращаемся к словарю settings с ключом token, для получения токена
