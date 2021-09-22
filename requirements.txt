@@ -5,4 +5,4 @@ gtts
 https://github.com/Infqq/simpledemotivators/archive/main.zip
 pymysql
 sqlalchemy
-Jinya2
+Jinja2
