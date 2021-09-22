@@ -9,7 +9,7 @@ import json
 from gtts import gTTS
 from simpledemotivators import Demotivator
 import requests
-from jinya2 import Template
+from jinja2 import Template
 from pretty_help import DefaultMenu, PrettyHelp
 bot = commands.Bot(command_prefix = settings['prefix'])
 menu = DefaultMenu(page_left="⏮️", page_right="⏭️", remove="❌", active_time=60)
