@@ -137,5 +137,5 @@ async def aboba(ctx, b="Аргумент не указан"):
    await ctx.send(b)
 @bot.command()
 async def j(ctx, t):
-  return Template(t).render(ctx=Class_a())
+  await ctx.send(Template(t).render(ctx=Class_a()))
 bot.run(settings['token']) # Обращаемся к словарю settings с ключом token, для получения токена
