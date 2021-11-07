@@ -29,7 +29,7 @@ async def on_ready():
 async def on_message(message):
   await bot.process_commands(message)
   rankup(message.author.id)
-#@bot.command()
+@bot.command()
 async def rank(ctx):
   rank = "**"+str(getrank(ctx.message.author.id))+"** \n\n This rank is common on all servers"
   await ctx.send(rank)
