@@ -35,7 +35,7 @@ async def on_message(message):
   rankup(message.author.id)
 @bot.command()
 async def set_admin_role(ctx, id):
-    if ctx.author.id == ctx.guild.owner.id:
+    if ctx.message.author.id == ctx.guild.owner.id:
         ss = getServerSettings(ctx.guild.id)
         ss["adminRoleID"] = str(id)
         setServerSettings(ss)
@@ -86,14 +86,14 @@ async def write(ctx, arg):
     print(author, t)
     await ctx.send(t)
 @bot.command()
-async def friend(ctx): await ctx.author.send_friend_request()
+async def friend(ctx): await ctx.message.author.send_friend_request()
 @bot.command()
 async def warn(ctx, arg, txt):
     tt = str(arg)
     txt = str(txt)
     author = ctx.message.author.id
     adm = getServerSettings(ctx.guild.id)["adminRoleID"]
-    if adm and ctx.guild.get_role(adm) in ctx.author.roles:
+    if adm and ctx.guild.get_role(adm) in ctx.message.author.roles:
         await ctx.send(mkwarn(userid=tt, serverid=str(ctx.guild.id), roleid=adm, txt=txt))
     else:
         await ctx.send(mkwarn(userid=0, serverid=str(ctx.guild.id), roleid=0, txt=txt))
