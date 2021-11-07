@@ -75,7 +75,7 @@ def mkwarn(serverid,userid,roleid,txt):
     else:
         return "Sorry, you are not an admin."
 
-def SetServerSettings(ss):
+def setServerSettings(ss):
     ss2 = db.session.query(Server).get(ss["serverid"])
     ss2.prefix = ss["prefix"]
     ss2.adminroleid = ss["adminRoleID"]
