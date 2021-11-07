@@ -14,7 +14,7 @@ from pretty_help import DefaultMenu, PrettyHelp
 bot = commands.Bot(command_prefix = settings['prefix'])
 menu = DefaultMenu(page_left="⏮️", page_right="⏭️", remove="❌", active_time=60)
 bot.help_command = PrettyHelp(menu=menu)
-#from dbconnect import rankup, getrank
+from database import rankup, getrank
 class Class_a:
  def e(self, id):
   return "<:emoji:" + str(id) + ">"
@@ -22,17 +22,17 @@ class Class_a:
   return txt
 @bot.event
 async def on_ready():
-    activity = discord.Activity(type=discord.ActivityType.listening, name="nasOS is the best")
+    activity = discord.Activity(type=discord.ActivityType.listening, name="n!help")
     await bot.change_presence(status=discord.Status.idle, activity=activity)
     print("Bot is ready!")
 @bot.event
 async def on_message(message):
   await bot.process_commands(message)
-#  rankup(message.author.id)
+  rankup(message.author.id)
 #@bot.command()
-#async def rank(ctx):
-#  rank = str(getrank(ctx.message.author.id))
-#  await ctx.send("Ранг: "+rank+"\nРанг общий для всех серверов")
+async def rank(ctx):
+  rank = "**"+str(getrank(ctx.message.author.id))+"** \n\n This rank is common on all servers"
+  await ctx.send(rank)
 @bot.command(help="Say hello")
 async def hello(ctx): 
     author = ctx.message.author
