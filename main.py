@@ -33,6 +33,23 @@ async def on_message(message):
 async def rank(ctx):
   rank = "**"+str(getrank(ctx.message.author.id))+"** \n\n This rank is common on all servers"
   await ctx.send(rank)
+@bot.command()
+async def number(ctx):
+    lst = ["0️⃣","1️⃣","2️⃣","3️⃣","4️⃣","5️⃣","6️⃣","7️⃣","8️⃣","9️⃣"]
+    ans = __import__("random").choice(lst)
+    msg = ctx.send("Guess the number from 0 to 9")
+    for a in lst:
+        msg.add_reaction(a)
+    while True:
+        for r in msg.reactions:
+            users = await r.users().flatten()
+            if ctx.message.author in users:
+                if r.emoji == ans:
+                    await ctx.send("Right! The number was "+ans)
+                else:
+                    await ctx.send("Incorrect, the number was "+ans)
+                break
+    __import__("time").sleep(1)
 @bot.command(help="Say hello")
 async def hello(ctx): 
     author = ctx.message.author
