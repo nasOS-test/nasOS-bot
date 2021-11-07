@@ -14,7 +14,7 @@ from pretty_help import DefaultMenu, PrettyHelp
 bot = commands.Bot(command_prefix = settings['prefix'])
 menu = DefaultMenu(page_left="⏮️", page_right="⏭️", remove="❌", active_time=60)
 bot.help_command = PrettyHelp(menu=menu)
-from database import rankup, getrank
+from database import rankup, getrank, mkwarn, getwarns, getServerSettings, setServerSettings
 class Class_a:
  def e(self, id):
   return "<:emoji:" + str(id) + ">"
@@ -29,6 +29,17 @@ async def on_ready():
 async def on_message(message):
   await bot.process_commands(message)
   rankup(message.author.id)
+@bot.command()
+async def set_admin_role(ctx, id):
+    ss = getServerSettings(ctx.guild.id)
+    ss["adminRoleID"] = id
+    setServerSettings(ss)
+    await ctx.send("OK")
+@bot.command()
+async def warns(ctx, userid):
+    w = getwarns(userid)
+    for warn in w:
+        await ctx.send(warn)
 @bot.command()
 async def rank(ctx):
   rank = "**"+str(getrank(ctx.message.author.id))+"** \n\n This rank is common on all servers"
@@ -69,11 +80,13 @@ async def write(ctx, arg):
     print(author, t)
     await ctx.send(t)
 @bot.command()
-async def warn(ctx, arg):
-    tt = str(arg)
-    author = ctx.message.author
-    print(author, "User %s has been warned!" % tt)
-    await ctx.send("User %s has been warned!" % tt) #отправляем обратно аргумент
+async def friend(ctx): await ctx.author.send_friend_request()
+#@bot.command()
+#async def warn(ctx, arg):
+#    tt = str(arg)
+#    author = ctx.message.author.id
+#    ss = getServerSettings(ctx.guild.id)
+#    if 
 @bot.command()
 async def date(ctx):
     author = ctx.message.author
