@@ -11,6 +11,10 @@ from simpledemotivators import Demotivator
 import requests
 from jinja2 import Template
 from pretty_help import DefaultMenu, PrettyHelp
+import logging
+
+logging.basicConfig(level=logging.INFO)
+
 bot = commands.Bot(command_prefix = settings['prefix'])
 menu = DefaultMenu(page_left="⏮️", page_right="⏭️", remove="❌", active_time=60)
 bot.help_command = PrettyHelp(menu=menu)
