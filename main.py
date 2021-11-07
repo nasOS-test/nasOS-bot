@@ -37,7 +37,7 @@ async def rank(ctx):
 async def number(ctx):
     lst = ["0️⃣","1️⃣","2️⃣","3️⃣","4️⃣","5️⃣","6️⃣","7️⃣","8️⃣","9️⃣"]
     ans = __import__("random").choice(lst)
-    msg = ctx.send("Guess the number from 0 to 9")
+    msg = await ctx.send("Guess the number from 0 to 9")
     for a in lst:
         msg.add_reaction(a)
     while True:
