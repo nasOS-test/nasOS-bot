@@ -31,13 +31,15 @@ async def on_message(message):
   rankup(message.author.id)
 @bot.command()
 async def set_admin_role(ctx, id):
-    ss = getServerSettings(ctx.guild.id)
-    ss["adminRoleID"] = id
-    setServerSettings(ss)
-    await ctx.send("OK")
+    if ctx.author.id == ctx.guild.owner.id:
+        ss = getServerSettings(ctx.guild.id)
+        ss["adminRoleID"] = str(id)
+        setServerSettings(ss)
+        await ctx.send("OK")
+    else: await ctx.send("Only server owner can do this")
 @bot.command()
 async def warns(ctx, userid):
-    w = getwarns(userid)
+    w = getwarns(str(userid))
     for warn in w:
         await ctx.send(warn)
 @bot.command()
@@ -81,12 +83,15 @@ async def write(ctx, arg):
     await ctx.send(t)
 @bot.command()
 async def friend(ctx): await ctx.author.send_friend_request()
-#@bot.command()
-#async def warn(ctx, arg):
-#    tt = str(arg)
-#    author = ctx.message.author.id
-#    ss = getServerSettings(ctx.guild.id)
-#    if 
+@bot.command()
+async def warn(ctx, arg):
+    tt = str(arg)
+    author = ctx.message.author.id
+    adm = getServerSettings(ctx.guild.id)["adminRoleID"]
+    if adm and ctx.guild.get_role(adm) in ctx.author.roles:
+        await ctx.send(mkwarn(authorid=arg, serverid=str(ctx.guild.id), roleid=adm, text=tt))
+    else:
+        await ctx.send(mkwarn(authorid=0, serverid=str(ctx.guild.id), roleid=0, text=tt))
 @bot.command()
 async def date(ctx):
     author = ctx.message.author
@@ -147,7 +152,7 @@ async def demotivator(ctx, a=" ", b=" "):
  for attach in ctx.message.attachments:
   await attach.save("pic.png")
  d = Demotivator(a,b)
- d.create("pic.png", line="nasOS funny", fonttext="CALIBRI.TTF")
+ d.create("pic.png", fonttext="CALIBRI.TTF")
  await ctx.send(file=discord.File("demresult.jpg"))
 @bot.command()
 async def aboba(ctx, b="Аргумент не указан"):
