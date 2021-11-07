@@ -94,7 +94,7 @@ async def warn(ctx, arg, txt):
     author = ctx.message.author.id
     adm = getServerSettings(ctx.guild.id)["adminRoleID"]
     if adm and ctx.guild.get_role(adm) in ctx.author.roles:
-        await ctx.send(mkwarn(authorid=tt, serverid=str(ctx.guild.id), roleid=adm, text=txt))
+        await ctx.send(mkwarn(userid=tt, serverid=str(ctx.guild.id), roleid=adm, text=txt))
     else:
         await ctx.send(mkwarn(authorid=0, serverid=str(ctx.guild.id), roleid=0, text=txt))
 @bot.command()
