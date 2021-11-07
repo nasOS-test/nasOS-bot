@@ -84,14 +84,15 @@ async def write(ctx, arg):
 @bot.command()
 async def friend(ctx): await ctx.author.send_friend_request()
 @bot.command()
-async def warn(ctx, arg):
+async def warn(ctx, arg, txt):
     tt = str(arg)
+    txt = str(txt)
     author = ctx.message.author.id
     adm = getServerSettings(ctx.guild.id)["adminRoleID"]
     if adm and ctx.guild.get_role(adm) in ctx.author.roles:
-        await ctx.send(mkwarn(authorid=arg, serverid=str(ctx.guild.id), roleid=adm, text=tt))
+        await ctx.send(mkwarn(authorid=tt, serverid=str(ctx.guild.id), roleid=adm, text=txt))
     else:
-        await ctx.send(mkwarn(authorid=0, serverid=str(ctx.guild.id), roleid=0, text=tt))
+        await ctx.send(mkwarn(authorid=0, serverid=str(ctx.guild.id), roleid=0, text=txt))
 @bot.command()
 async def date(ctx):
     author = ctx.message.author
