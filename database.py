@@ -54,6 +54,8 @@ def getServerSettings(id):
                  "premium": a.premium }
     else:
         a = Server(serverid=id, prefix="n!", adminroleid=None, premium=False)
+        db.session.add(a)
+        db.session.commit()
         return getServerSettings(id)
 
 def getwarns(serverid,userid):
