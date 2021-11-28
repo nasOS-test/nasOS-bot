@@ -178,5 +178,13 @@ async def aboba(ctx, b="Аргумент не указан"):
 @bot.command()
 async def calc(ctx, t):
   t = str(t)
-  await ctx.send(Template(t).render(abs=abs, i=1j))
+  t = Template("{{"+t+"}}").render(abs=abs, i=1j)
+  try:
+    t = int(t)
+    await ctx.send(t)
+  except ValueError:
+    t = complex(t)
+    await ctx.send(f"Реальная часть: {t.real}\nМнимая часть: {t.imag}")
+  except:
+    await ctx.send(t)
 bot.run(settings['token']) # Обращаемся к словарю settings с ключом token, для получения токена
