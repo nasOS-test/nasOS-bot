@@ -5,7 +5,7 @@ import os
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ["DB"]
 db = SQLAlchemy(app)
-
+db.init_app(app)
 class Rank(db.Model):
     __tablename__ = "ranks"
     userid = db.Column(db.String(30), primary_key=True)
