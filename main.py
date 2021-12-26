@@ -24,37 +24,35 @@ logging.basicConfig(level=logging.INFO)
 bot = commands.Bot(command_prefix = settings['prefix'])
 menu = DefaultMenu(page_left="⏮️", page_right="⏭️", remove="❌", active_time=60)
 bot.help_command = PrettyHelp(menu=menu)
-from database import rankup, getrank, mkwarn, getwarns, getServerSettings, setServerSettings
+from database import app, rankup, getrank, mkwarn, getwarns, getServerSettings, setServerSettings
 
 ###Web
-
+app.secret_key = bytes(os.environ["SECRET"], "UTF-8")
+os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "true"
+app.config["DISCORD_CLIENT_ID"] = settings["id"]   # Discord client ID.
+app.config["DISCORD_CLIENT_SECRET"] = os.environ["DSECRET"]                # Discord client secret.
+app.config["DISCORD_REDIRECT_URI"] = "https://nasos-bot-production.up.railway.app/callback"                 # URL to your callback endpoint.
+app.config["DISCORD_BOT_TOKEN"] = settings["token"]
+discord2 = DiscordOAuth2Session(app)
+@app.route("/login/")
+def login():
+    return discord2.create_session()
+@app.errorhandler(Unauthorized)
+def redirect_unauthorized(e):
+    return redirect(url_for("login"))
+@app.route("/")
+@requires_authorization
+def me():
+    user = discord2.fetch_user()
+    return render_template("user.html", user=user, rank=getrank(user.id))
+@app.route("/callback")
+def callback():
+    discord2.callback()
+    return redirect("/")
+@app.route("/logout")
+def logout():
+discord2.revoke()
 def WebServer():
-    app = Flask(__name__)
-    app.secret_key = bytes(os.environ["SECRET"], "UTF-8")
-    os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "true"
-    app.config["DISCORD_CLIENT_ID"] = settings["id"]   # Discord client ID.
-    app.config["DISCORD_CLIENT_SECRET"] = os.environ["DSECRET"]                # Discord client secret.
-    app.config["DISCORD_REDIRECT_URI"] = "https://nasos-bot-production.up.railway.app/callback"                 # URL to your callback endpoint.
-    app.config["DISCORD_BOT_TOKEN"] = settings["token"]
-    discord2 = DiscordOAuth2Session(app)
-    @app.route("/login/")
-    def login():
-        return discord2.create_session()
-    @app.errorhandler(Unauthorized)
-    def redirect_unauthorized(e):
-        return redirect(url_for("login"))
-    @app.route("/")
-    @requires_authorization
-    def me():
-        user = discord2.fetch_user()
-        return render_template("user.html", user=user, rank=getrank(user.id))
-    @app.route("/callback")
-    def callback():
-        discord2.callback()
-        return redirect("/")
-    @app.route("/logout")
-    def logout():
-        discord2.revoke()
     run_simple("",int(os.environ["PORT"]),app)
 
 
