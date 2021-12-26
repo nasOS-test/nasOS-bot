@@ -7,3 +7,4 @@ pymysql
 flask
 flask-sqlalchemy
 Jinja2
+flask-discord
