@@ -51,7 +51,7 @@ def callback():
     return redirect("/")
 @app.route("/logout")
 def logout():
-discord2.revoke()
+    discord2.revoke()
 def WebServer():
     run_simple("",int(os.environ["PORT"]),app)
 
