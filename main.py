@@ -12,6 +12,10 @@ import requests
 from jinja2 import Template
 from pretty_help import DefaultMenu, PrettyHelp
 import logging
+from threading import Thread
+from flask import Flask, redirect, url_for, render_template
+from flask_discord import DiscordOAuth2Session, requires_authorization, Unauthorized
+
 
 logging.basicConfig(level=logging.INFO)
 
@@ -19,6 +23,37 @@ bot = commands.Bot(command_prefix = settings['prefix'])
 menu = DefaultMenu(page_left="⏮️", page_right="⏭️", remove="❌", active_time=60)
 bot.help_command = PrettyHelp(menu=menu)
 from database import rankup, getrank, mkwarn, getwarns, getServerSettings, setServerSettings
+
+###Web
+
+def WebServer():
+    app = Flask(__name__)
+    app.secret_key = bytes(os.environ["SECRET"], "UTF-8")
+    app.config["DISCORD_CLIENT_ID"] = settings["id"]   # Discord client ID.
+    app.config["DISCORD_CLIENT_SECRET"] = ""                # Discord client secret.
+    app.config["DISCORD_REDIRECT_URI"] = ""                 # URL to your callback endpoint.
+    app.config["DISCORD_BOT_TOKEN"] = settings["token"]
+    discord2 = DiscordOAuth2Session(app)
+    @app.route("/login/")
+    def login():
+        return discord2.create_session()
+	@app.errorhandler(Unauthorized)
+    def redirect_unauthorized(e):
+        return redirect(url_for("login"))
+    @app.route("/me/")
+    @requires_authorization
+    def me():
+        user = discord.fetch_user()
+        return render_template("user.html", user=user, rank=getrank(user.id))
+    @app.route("/callback/")
+    def callback():
+        discord.callback()
+        return redirect(url_for(".me"))
+    app.run(int(os.environ["PORT"]))
+
+thr = threading.Thread(target=WebServer)
+thr.start()
+
 class Class_a:
  def e(self, id):
   return "<:emoji:" + str(id) + ">"
