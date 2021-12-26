@@ -15,6 +15,7 @@ import logging
 from threading import Thread
 from flask import Flask, redirect, url_for, render_template
 from flask_discord import DiscordOAuth2Session, requires_authorization, Unauthorized
+import os
 
 
 logging.basicConfig(level=logging.INFO)
