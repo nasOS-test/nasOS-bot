@@ -5,6 +5,6 @@ gtts
 https://github.com/Infqq/simpledemotivators/archive/main.zip
 pymysql
 flask
-flask-sqlalchemy<1.4
+flask-sqlalchemy
 Jinja2
 flask-discord
