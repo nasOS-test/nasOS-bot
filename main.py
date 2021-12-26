@@ -37,10 +37,10 @@ def WebServer():
     @app.route("/login/")
     def login():
         return discord2.create_session()
-	@app.errorhandler(Unauthorized)
+    @app.errorhandler(Unauthorized)
     def redirect_unauthorized(e):
-        return redirect(url_for("login"))
-    @app.route("/me/")
+    return redirect(url_for("login"))
+    @app.route("/")
     @requires_authorization
     def me():
         user = discord.fetch_user()
@@ -48,7 +48,7 @@ def WebServer():
     @app.route("/callback/")
     def callback():
         discord.callback()
-        return redirect(url_for(".me"))
+        return redirect("/")
     app.run(int(os.environ["PORT"]))
 
 
