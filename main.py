@@ -39,7 +39,7 @@ def WebServer():
         return discord2.create_session()
     @app.errorhandler(Unauthorized)
     def redirect_unauthorized(e):
-    return redirect(url_for("login"))
+        return redirect(url_for("login"))
     @app.route("/")
     @requires_authorization
     def me():
