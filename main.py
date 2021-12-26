@@ -49,7 +49,7 @@ def WebServer():
         return render_template("user.html", user=user, rank=getrank(user.id))
     @app.route("/callback")
     def callback():
-        discord.callback()
+        discord2.callback()
         return redirect("/")
     @app.route("/logout")
     def logout():
