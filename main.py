@@ -16,6 +16,7 @@ from threading import Thread
 from flask import Flask, redirect, url_for, render_template
 from flask_discord import DiscordOAuth2Session, requires_authorization, Unauthorized
 import os
+from werkzeug.serving import run_simple
 
 
 logging.basicConfig(level=logging.INFO)
@@ -50,7 +51,7 @@ def WebServer():
     def callback():
         discord.callback()
         return redirect("/")
-    app.run("",int(os.environ["PORT"]))
+    run_simple("",int(os.environ["PORT"]),app)
 
 
 thr = Thread(target=WebServer)
