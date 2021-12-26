@@ -52,7 +52,7 @@ def WebServer():
     app.run(int(os.environ["PORT"]))
 
 
-thr = threading.Thread(target=WebServer)
+thr = Thread(target=WebServer)
 thr.start()
 
 class Class_a:
