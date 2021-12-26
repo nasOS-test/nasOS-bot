@@ -31,6 +31,7 @@ from database import rankup, getrank, mkwarn, getwarns, getServerSettings, setSe
 def WebServer():
     app = Flask(__name__)
     app.secret_key = bytes(os.environ["SECRET"], "UTF-8")
+    os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "true"    # !! Only in development environment.
     app.config["DISCORD_CLIENT_ID"] = settings["id"]   # Discord client ID.
     app.config["DISCORD_CLIENT_SECRET"] = os.environ["DSECRET"]                # Discord client secret.
     app.config["DISCORD_REDIRECT_URI"] = "https://nasos-bot-production.up.railway.app/callback"                 # URL to your callback endpoint.
