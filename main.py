@@ -50,7 +50,7 @@ def WebServer():
     def callback():
         discord.callback()
         return redirect("/")
-    app.run(int(os.environ["PORT"]))
+    app.run("",int(os.environ["PORT"]))
 
 
 thr = Thread(target=WebServer)
