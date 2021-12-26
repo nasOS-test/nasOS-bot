@@ -86,7 +86,7 @@ async def set_admin_role(ctx, id):
     else: await ctx.reply("Only server owner can do this")
 @bot.command()
 async def web(ctx):
-    
+    await ctx.send("https://nasos-bot-production.up.railway.app")
 @bot.command()
 async def warns(ctx, userid):
     w = getwarns(str(userid))
