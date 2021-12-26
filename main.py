@@ -46,7 +46,7 @@ def WebServer():
     @app.route("/")
     @requires_authorization
     def me():
-        user = discord.fetch_user()
+        user = discord2.fetch_user()
         return render_template("user.html", user=user, rank=getrank(user.id))
     @app.route("/callback")
     def callback():
