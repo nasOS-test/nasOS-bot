@@ -52,6 +52,7 @@ def callback():
 @app.route("/logout")
 def logout():
     discord2.revoke()
+    return redirect("/")
 def WebServer():
     run_simple("",int(os.environ["PORT"]),app)
 
