@@ -33,7 +33,7 @@ def WebServer():
     app.secret_key = bytes(os.environ["SECRET"], "UTF-8")
     app.config["DISCORD_CLIENT_ID"] = settings["id"]   # Discord client ID.
     app.config["DISCORD_CLIENT_SECRET"] = os.environ["DSECRET"]                # Discord client secret.
-    app.config["DISCORD_REDIRECT_URI"] = "https://nasos-bot-production.up.railway.app/"                 # URL to your callback endpoint.
+    app.config["DISCORD_REDIRECT_URI"] = "https://nasos-bot-production.up.railway.app/callback"                 # URL to your callback endpoint.
     app.config["DISCORD_BOT_TOKEN"] = settings["token"]
     discord2 = DiscordOAuth2Session(app)
     @app.route("/login/")
@@ -47,7 +47,7 @@ def WebServer():
     def me():
         user = discord.fetch_user()
         return render_template("user.html", user=user, rank=getrank(user.id))
-    @app.route("/callback/")
+    @app.route("/callback")
     def callback():
         discord.callback()
         return redirect("/")
