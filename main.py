@@ -24,7 +24,7 @@ logging.basicConfig(level=logging.INFO)
 bot = commands.Bot(command_prefix = settings['prefix'])
 menu = DefaultMenu(page_left="⏮️", page_right="⏭️", remove="❌", active_time=60)
 bot.help_command = PrettyHelp(menu=menu)
-from database import app, rankup, getrank, mkwarn, getwarns, getServerSettings, setServerSettings
+from database import app, rankup, getrank, mkwarn, getwarns, getServerSettings, setServerSettings, lsguilds_id
 
 ###Web
 app.secret_key = bytes(os.environ["SECRET"], "UTF-8")
