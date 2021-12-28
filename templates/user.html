@@ -8,15 +8,28 @@ h1 {
     color: {{user.color}};
     }
 img {
-    width: 200px;
-    height: 200px;
+    width: 35px;
+    height: 35px;
 }
+.g {
+    border: 3px black;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px;
+    background-color: #eee;
+    }
 </style></head><body>
 <h1>{{user.name}}</h1>
 <b>ID: </b>{{user.id}}<br>
 <b>Avatar: </b>
 <img src="{{user.avatar_url}}"></img><br>
 <b>Rank: </b>{{rank}}<br>
+{% for g in gs %}
+<div class="g">
+<h1><img src="{{g.icon_url}}"></img>{{g.name}}</h1><br>
+<a href="/managesrv/{{g.id}}">Manage</a>
+</div>
+{% endfor %}
 <a href="/logout">log out</a>
 </body></html>
 

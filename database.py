@@ -85,7 +85,11 @@ def setServerSettings(ss):
     ss2.premium = ss["premium"]
     db.session.add(ss2)
     db.session.commit()
-
+def lsguilds_id():
+    tmp = []
+    for id in Server.query.all():
+        tmp.append(id.id)
+    return tmp
 #def delwarn(id, serverid, roleid):
 #  if getServerSettings(serverid)["adminRoleID"] == roleid:
     

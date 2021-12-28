@@ -44,7 +44,13 @@ def redirect_unauthorized(e):
 @requires_authorization
 def me():
     user = discord2.fetch_user()
-    return render_template("user.html", user=user, rank=getrank(user.id))
+    gs = discord2.fetch_guilds()
+    gs2 = []
+    gs3 = lsguilds_id()
+    for g in gs:
+        if str(g.id) in gs3:
+            gs2.append(g)
+    return render_template("user.html", user=user, rank=getrank(user.id), gs=gs2)
 @app.route("/callback")
 def callback():
     discord2.callback()
