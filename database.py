@@ -88,7 +88,7 @@ def setServerSettings(ss):
 def lsguilds_id():
     tmp = []
     for id in Server.query.all():
-        tmp.append(id.id)
+        tmp.append(id.serverid)
     return tmp
 #def delwarn(id, serverid, roleid):
 #  if getServerSettings(serverid)["adminRoleID"] == roleid:
