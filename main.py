@@ -151,7 +151,7 @@ async def warn(ctx, arg, txt):
     else:
         await ctx.reply(mkwarn(userid=0, serverid=str(ctx.guild.id), roleid=0, txt=txt))
 @bot.command(hidden=True)
-async def setupsrv():
+async def setupsrv(ctx):
     getServerSettings(ctx.guild.id)
 @bot.command()
 async def date(ctx):
