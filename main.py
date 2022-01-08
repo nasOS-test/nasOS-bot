@@ -61,7 +61,7 @@ def logout():
     return redirect("/")
 @app.route("/pattern.png")
 def __pattern():
-    return send_from_directory("files", "pattern.png")
+    return send_from_directory("files", "/pattern.png")
 def WebServer():
     run_simple("",int(os.environ["PORT"]),app)
 
