@@ -8,17 +8,17 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 db = SQLAlchemy(app)
 db.init_app(app)
 class Rank(db.Model):
-    __tablename__ = "ranks"
+    __tablename__ = "nb_ranks"
     userid = db.Column(db.String(30), primary_key=True)
     rank = db.Column(db.Integer())
 class Server(db.Model):
-    __tablename__ = "servers"
+    __tablename__ = "nb_servers"
     serverid = db.Column(db.String(30), primary_key=True)
     prefix = db.Column(db.String(5))
     adminroleid = db.Column(db.String(30))
     premium = db.Column(db.Boolean())
 class Warn(db.Model):
-    __tablename__ = "warns"
+    __tablename__ = "nb_warns"
     id = db.Column(db.Integer(), primary_key=True)
     userid = db.Column(db.String(30))
     serverid = db.Column(db.String(30))
