@@ -13,7 +13,7 @@ from jinja2 import Template
 from pretty_help import DefaultMenu, PrettyHelp
 import logging
 from threading import Thread
-from flask import Flask, redirect, url_for, render_template
+from flask import Flask, redirect, url_for, render_template, send_from_directory
 from flask_discord import DiscordOAuth2Session, requires_authorization, Unauthorized
 import os
 from werkzeug.serving import run_simple
@@ -59,6 +59,9 @@ def callback():
 def logout():
     discord2.revoke()
     return redirect("/")
+@app.route("/pattern.png")
+def __pattern():
+    return send_from_directory("files", "pattern.png")
 def WebServer():
     run_simple("",int(os.environ["PORT"]),app)
 

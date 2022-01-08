@@ -25,7 +25,6 @@ class Warn(db.Model):
     text = db.Column(db.Text())
 db.create_all()
 
-
 def rankup(id):
     id = str(id)
     a = db.session.query(Rank).get(id)
