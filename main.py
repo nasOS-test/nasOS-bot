@@ -17,14 +17,14 @@ from flask import Flask, redirect, url_for, render_template, send_from_directory
 from flask_discord import DiscordOAuth2Session, requires_authorization, Unauthorized
 import os
 from werkzeug.serving import run_simple
-
+from sqlalchemy.exc import PendingRollbackError as PRError
 
 logging.basicConfig(level=logging.INFO)
 
 bot = commands.Bot(command_prefix = settings['prefix'])
 menu = DefaultMenu(page_left="⏮️", page_right="⏭️", remove="❌", active_time=60)
 bot.help_command = PrettyHelp(menu=menu)
-from database import app, rankup, getrank, mkwarn, getwarns, getServerSettings, setServerSettings, lsguilds_id
+from database import app, rankup, getrank, mkwarn, getwarns, getServerSettings, setServerSettings, lsguilds_id, db
 
 ###Web
 app.secret_key = bytes(os.environ["SECRET"], "UTF-8")
@@ -83,6 +83,15 @@ async def on_ready():
 async def on_message(message):
   await bot.process_commands(message)
   rankup(message.author.id)
+@bot.event
+async def on_command_error(ctx, error):
+    if isinstance(error, PRError):
+        await ctx.send("⚠️ **DB Pending Rollback Error, trying to rollback...**")
+        try:
+            db.session.rollback()
+            await ctx.send("✅ **Please run command again**")
+        except:
+            await ctx.send("❌ **Rollback failed, please contact scratcher-402**")
 @bot.command()
 async def set_admin_role(ctx, id):
     if ctx.message.author.id == ctx.guild.owner.id:
@@ -153,6 +162,10 @@ async def warn(ctx, arg, txt):
 @bot.command(hidden=True)
 async def setupsrv(ctx):
     getServerSettings(ctx.guild.id)
+@bot.command(hidden=True)
+async def exec(ctx, *, code):
+    if ctx.author.id == 790118961671831552:
+        exec(code)
 @bot.command()
 async def date(ctx):
     author = ctx.message.author
