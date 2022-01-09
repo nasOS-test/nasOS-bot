@@ -66,7 +66,7 @@ def callback():
 def logout():
     discord2.revoke()
     return redirect("/")
-@app.route("/manageserver/<str:id>")
+@app.route("/manageserver/<id>")
 def managesrv(id):
     return render_template("manage.html", servername=id)
 def WebServer():
