@@ -18,6 +18,10 @@ from flask_discord import DiscordOAuth2Session, requires_authorization, Unauthor
 import os
 from werkzeug.serving import run_simple
 from sqlalchemy.exc import PendingRollbackError as PRError
+from flask_wtf import FlaskForm
+from wtforms import StringField, PasswordField, BooleanField, SubmitField
+from wtforms.validators import DataRequired, Email, Length
+
 
 logging.basicConfig(level=logging.INFO)
 
@@ -34,6 +38,9 @@ app.config["DISCORD_CLIENT_SECRET"] = os.environ["DSECRET"]                # Dis
 app.config["DISCORD_REDIRECT_URI"] = "https://nasos-bot-production.up.railway.app/callback"                 # URL to your callback endpoint.
 app.config["DISCORD_BOT_TOKEN"] = settings["token"]
 discord2 = DiscordOAuth2Session(app)
+class SetAdminRoleForm(FlaskForm):
+    admrole = StringField("", validators=[DataRequired()])
+    submit = SubmitField("")
 @app.route("/login/")
 def login():
     return discord2.create_session()
@@ -59,9 +66,9 @@ def callback():
 def logout():
     discord2.revoke()
     return redirect("/")
-@app.route("/pattern.png")
-def __pattern():
-    return send_from_directory("files", "/pattern.png")
+@app.route("/manageserver/<str:id>")
+def managesrv(id):
+    return render_template("manage.html", servername=id)
 def WebServer():
     run_simple("",int(os.environ["PORT"]),app)
 
