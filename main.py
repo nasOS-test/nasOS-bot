@@ -170,6 +170,8 @@ async def warn(ctx, arg, txt):
         await ctx.reply(mkwarn(userid=tt, serverid=str(ctx.guild.id), roleid=adm, txt=txt))
     else:
         await ctx.reply(mkwarn(userid=0, serverid=str(ctx.guild.id), roleid=0, txt=txt))
+    if not ctx.guild.get_role(adm) in ctx.message.author.roles:
+        await ctx.reply("You are not an admin")
 @bot.command(hidden=True)
 async def setupsrv(ctx):
     getServerSettings(ctx.guild.id)
