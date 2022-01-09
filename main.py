@@ -89,7 +89,11 @@ async def on_ready():
 @bot.event
 async def on_message(message):
   await bot.process_commands(message)
-  rankup(message.author.id)
+  try:
+      rankup(message.author.id)
+  except PRError:
+      db.session.rollback()
+      rankup(message.author.id)
 @bot.event
 async def on_command_error(ctx, error):
     if isinstance(error, PRError):
