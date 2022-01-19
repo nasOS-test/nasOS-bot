@@ -89,11 +89,6 @@ async def on_ready():
 @bot.event
 async def on_message(message):
   await bot.process_commands(message)
-  try:
-      rankup(message.author.id)
-  except PRError:
-      db.session.rollback()
-      rankup(message.author.id)
 @bot.event
 async def on_command_error(ctx, error):
     if isinstance(error, PRError):
@@ -213,6 +208,8 @@ async def ban(ctx, member: discord.Member, *, reason=None):
   if ctx.author.id == 790118961671831552:
     await member.ban(reason=reason)
     await ctx.reply("пхпхпх замамили скаммонта")
+  else:
+    await ctx.reply("🅰️🅱️🅾️🅱️🅰️")
     
 @bot.command()
 async def avatar(ctx, member: discord.Member):
