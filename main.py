@@ -207,20 +207,12 @@ async def about_fox(ctx):
     response = requests.get('https://some-random-api.ml/facts/fox') # Get-запрос
     json_data = json.loads(response.text) # Извлекаем JSON
     await ctx.reply(json_data['fact']) # Отправляем Embed
-@bot.command()
-async def kick(ctx, member: discord.Member, *, reason=None):
-    await member.kick(reason=reason)
-    await ctx.reply(f'User {member} has kicked.')
 
 @bot.command()
 async def ban(ctx, member: discord.Member, *, reason=None):
+  if ctx.author.id == 790118961671831552:
     await member.ban(reason=reason)
-    await ctx.reply(f'User {member} has banned.')
-    
-@bot.command()
-async def unban(ctx, member: discord.Member):
-    await member.unban(reason=reason)
-    await ctx.reply(f'User {member} has unbanned.')
+    await ctx.reply("пхпхпх замамили скаммонта")
     
 @bot.command()
 async def avatar(ctx, member: discord.Member):
