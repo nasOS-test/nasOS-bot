@@ -1,0 +1,35 @@
+﻿<html><head><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<style>
+*{
+    color: white;
+    }
+h1 {
+    font-size: 35px;
+    }
+img {
+    width: 35px;
+    height: 35px;
+}
+.g {
+    border: 3px black;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px;
+    background-color: #0a8;
+    }
+body {
+    background: #333;
+    }
+</style></head><body>
+<img src="{{user.avatar_url}}"></img><h1>{{user.name}}</h1><br>
+<b>ID: </b>{{user.id}}<br>
+<b>Rank: </b>{{rank}}<br>
+{% for g in gs %}
+<div class="g">
+<h1><img src="{{g.icon_url}}"></img>{{g.name}}</h1><br>
+<a href="/managesrv/{{g.id}}">Manage</a>
+</div>
+{% endfor %}
+<a href="/logout">log out</a>
+</body></html>
+
